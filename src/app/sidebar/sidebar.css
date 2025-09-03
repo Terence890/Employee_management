@@ -1,0 +1,113 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 280px;
+  background: var(--sidebar-bg-color);
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--card-border-color);
+  transition: transform 0.3s ease;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  flex-grow: 1;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: var(--text-color-secondary);
+  padding: 1.2rem 1rem;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links li a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--primary-glow);
+  transform: translateY(-50%);
+  transition: height 0.3s ease;
+  border-radius: 0 4px 4px 0;
+}
+
+.nav-links li a.active, .nav-links li a:hover {
+  background: var(--primary-glow-transparent);
+  color: var(--primary-glow);
+  transform: translateX(5px);
+}
+
+.nav-links li a.active::before, .nav-links li a:hover::before {
+  height: 80%;
+}
+
+.nav-links li a i {
+  font-size: 1.6rem;
+  line-height: 1;
+  width: 24px; /* Ensure consistent icon width */
+  text-align: center;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.logout-button {
+  background: transparent;
+  color: var(--text-color-secondary);
+  border: 1px solid var(--card-border-color);
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: auto; /* Pushes the button to the bottom */
+}
+
+.logout-button:hover {
+  background: var(--danger-color);
+  color: #fff;
+  border-color: var(--danger-color);
+}
+
+.logout-button i {
+  font-size: 1.4rem;
+  line-height: 1;
+}

@@ -1,0 +1,100 @@
+<div class="employees-page">
+  <header class="page-header">
+    <h1 class="text-gradient">Employees</h1>
+    <div class="actions">
+      <div class="view-toggle">
+        <button (click)="setViewMode('card')" [class.active]="viewMode() === 'card'">
+          <i class="iconoir-view-grid"></i>
+        </button>
+        <button (click)="setViewMode('list')" [class.active]="viewMode() === 'list'">
+          <i class="iconoir-list"></i>
+        </button>
+      </div>
+      <input type="search" placeholder="Search employees..." [value]="searchTerm()" (input)="searchTerm.set($event.target.value)" class="search-input">
+      <button (click)="openForm()" class="add-button">
+        <i class="iconoir-plus"></i>
+        <span>Add Employee</span>
+      </button>
+    </div>
+  </header>
+
+  @if (viewMode() === 'card') {
+    <div class="employee-grid">
+      @for (employee of filteredEmployees(); track employee.id) {
+        <div class="employee-card">
+          <div class="card-header">
+            <h3>{{ employee.name }}</h3>
+            <p>{{ employee.position }}</p>
+          </div>
+          <div class="card-body">
+            <p><i class="iconoir-mail"></i> {{ employee.email }}</p>
+            <p><i class="iconoir-building"></i> {{ employee.department }}</p>
+            <p><i class="iconoir-calendar-check"></i> Hire Date: {{ employee.hireDate }}</p>
+          </div>
+          <div class="card-actions">
+            <button (click)="editEmployee(employee)" class="action-button edit-button">
+              <i class="iconoir-edit-pencil"></i>
+              <span>Edit</span>
+            </button>
+            <button (click)="deleteEmployee(employee.id)" class="action-button delete-button">
+              <i class="iconoir-trash"></i>
+              <span>Delete</span>
+            </button>
+          </div>
+        </div>
+      }
+      @if (filteredEmployees().length === 0) {
+        <p class="no-results">No employees found.</p>
+      }
+    </div>
+  } @else {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Position</th>
+            <th>Hire Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employee of filteredEmployees(); track employee.id) {
+            <tr>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.email }}</td>
+              <td>{{ employee.department }}</td>
+              <td>{{ employee.position }}</td>
+              <td>{{ employee.hireDate }}</td>
+              <td class="table-actions">
+                <button (click)="editEmployee(employee)" class="action-button edit-button">
+                  <i class="iconoir-edit-pencil"></i>
+                </button>
+                <button (click)="deleteEmployee(employee.id)" class="action-button delete-button">
+                  <i class="iconoir-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+          @if (filteredEmployees().length === 0) {
+            <tr>
+              <td colspan="6" class="no-results-table">No employees found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (isFormOpen()) {
+    <div class="modal-backdrop">
+      <app-employee-form 
+        [employee]="selectedEmployee()" 
+        (close)="closeForm()" 
+        (save)="saveEmployee($event)"
+      ></app-employee-form>
+    </div>
+  }
+</div>

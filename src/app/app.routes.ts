@@ -5,9 +5,11 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
-import { Signin } from './signin/signin';
-import { Signup } from './signup/signup';
+import { AuthLayoutComponent } from './auth/auth-layout.component';
+import { SigninComponent } from './auth/signin.component';
+import { SignupComponent } from './auth/signup.component';
 import { authGuard } from './auth/auth.guard';
+import { publicGuard } from './auth/public.guard';
 
 export const routes: Routes = [
   {
@@ -24,13 +26,13 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'signin',
-    component: Signin,
-    title: 'WorkZen - Sign In'
+    path: '',
+    component: AuthLayoutComponent,
+    canActivate: [publicGuard],
+    children: [
+      { path: 'signin', component: SigninComponent, title: 'WorkZen - Sign In' },
+      { path: 'signup', component: SignupComponent, title: 'WorkZen - Sign Up' }
+    ]
   },
-  {
-    path: 'signup',
-    component: Signup,
-    title: 'WorkZen - Sign Up'
-  }
+  { path: '**', redirectTo: 'signin' }
 ];

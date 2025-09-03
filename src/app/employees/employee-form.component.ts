@@ -6,7 +6,7 @@ import { Employee } from './employees.service';
   selector: 'app-employee-form',
   imports: [ReactiveFormsModule],
   template: `
-    <form [formGroup]="employeeForm" (ngSubmit)="save.emit(employeeForm.value)" class="employee-form">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-form">
       <h2>{{ employee() ? 'Edit' : 'Add' }} Employee</h2>
       <div class="form-group">
         <label for="name">Name</label>
@@ -30,67 +30,13 @@ import { Employee } from './employees.service';
       </div>
     </form>
   `,
-  styles: [`
-    .employee-form {
-      background: #1c1c1c;
-      padding: 2rem;
-      border-radius: 8px;
-      width: 400px;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: #aaa;
-    }
-    input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background: #222;
-      color: #fff;
-      font-size: 1rem;
-    }
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .cancel-button {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .save-button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .save-button:disabled {
-      background: #555;
-      cursor: not-allowed;
-    }
-  `],
+  styleUrls: ['./employee-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmployeeFormComponent implements OnInit {
   employee = input<Employee | null>(null);
   close = output<void>();
-  save = output<Employee>();
+  save = output<Omit<Employee, 'id'> | Employee>();
 
   private fb = inject(FormBuilder);
   employeeForm: FormGroup;
@@ -110,6 +56,12 @@ export class EmployeeFormComponent implements OnInit {
     const currentEmployee = this.employee();
     if (currentEmployee) {
       this.employeeForm.patchValue(currentEmployee);
+    }
+  }
+
+  onSave() {
+    if (this.employeeForm.valid) {
+      this.save.emit(this.employeeForm.value);
     }
   }
 }

@@ -1,1 +1,70 @@
-<h1>Dashboard</h1>
+<div class="dashboard-container">
+    <h1 class="text-gradient">Dashboard</h1>
+  
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="iconoir-community"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ totalEmployees() }}</span>
+          <span class="stat-label">Total Employees</span>
+        </div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="iconoir-building"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ activeDepartments() }}</span>
+          <span class="stat-label">Active Departments</span>
+        </div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="iconoir-calendar"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">12</span>
+          <span class="stat-label">Upcoming Leaves</span>
+        </div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="iconoir-clock"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">92%</span>
+          <span class="stat-label">Overall Attendance</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="main-widgets-container">
+        <div class="main-widget recent-activity">
+            <h2 class="widget-title">Recent Activity</h2>
+            <ul>
+              @for(activity of recentActivity(); track activity.id) {
+                <li>
+                  <i [class]="'icon ' + activity.icon"></i>
+                  <p>{{ activity.description }}</p>
+                  <span class="time">{{ activity.time }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        
+          <div class="main-widget quick-links">
+            <h2 class="widget-title">Quick Links</h2>
+            <ul>
+              <li><a routerLink="/employees"><i class="iconoir-user-plus"></i> Add New Employee</a></li>
+              <li><a routerLink="/departments"><i class="iconoir-building-plus"></i> Create New Department</a></li>
+              <li><a href="#"><i class="iconoir-calendar-plus"></i> Request Leave</a></li>
+              <li><a href="#"><i class="iconoir-file-report"></i> Generate Report</a></li>
+            </ul>
+          </div>
+    </div>
+  </div>

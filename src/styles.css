@@ -1,12 +1,118 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&display=swap');
 
-html, body {
-  height: 100%;
+:root {
+  --primary-glow: #00f0ff;
+  --secondary-glow: #ff00f0;
+  --primary-glow-transparent: rgba(0, 240, 255, 0.5);
+  --secondary-glow-transparent: rgba(255, 0, 240, 0.5);
+  --background-dark: #0A0E21; /* Deep space blue */
+  --background-light: #f0f2f5;
+  --text-color-dark: #E0E6F1; /* Light sky blue */
+  --text-color-light: #1A202C;
+  --card-bg-dark: rgba(23, 27, 48, 0.6);
+  --card-bg-light: rgba(255, 255, 255, 0.8);
+  --card-border-dark: rgba(255, 255, 255, 0.1);
+  --card-border-light: rgba(0, 0, 0, 0.1);
+  --primary-color: #00B5CC;
+  --secondary-color: #D43FEE;
 }
 
 body {
-  background-color: #F2F4F7;
-  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-family: 'Exo 2', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--background-dark);
+  color: var(--text-color-dark);
+}
+
+body.dark-theme {
+  background-color: var(--background-dark);
+  color: var(--text-color-dark);
+  --card-bg-color: var(--card-bg-dark);
+  --card-border-color: var(--card-border-dark);
+}
+
+body.light-theme {
+  background-color: var(--background-light);
+  color: var(--text-color-light);
+  --card-bg-color: var(--card-bg-light);
+  --card-border-color: var(--card-border-light);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: inherit;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--card-border-dark);
+}
+
+.light-theme h2 {
+    border-bottom-color: var(--card-border-light);
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    display: inline-block;
+}
+
+.light-theme .text-gradient {
+    background: none;
+    -webkit-text-fill-color: inherit;
+    text-fill-color: inherit;
+}
+
+
+/* Iconoir styles */
+.iconoir-font {
+    font-family: 'iconoir' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

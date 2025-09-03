@@ -1,0 +1,148 @@
+/*
+* Dashboard Component Styles
+* Description: This file contains the styles for the dashboard component.
+* The styles are designed to be modern, clean, and visually appealing.
+*/
+
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns content to the start */
+  padding: 1.5rem;
+  background: var(--card-bg-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid var(--card-border-color);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--primary-glow);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin-right: 1.5rem;
+  color: var(--primary-glow);
+}
+
+.stat-info .stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-info .stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.main-widgets-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.main-widget {
+  padding: 2rem;
+  background: var(--card-bg-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid var(--card-border-color);
+}
+
+.widget-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.recent-activity ul, .quick-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-activity li {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.recent-activity li:last-child {
+  border-bottom: none;
+}
+
+.recent-activity .icon {
+    font-size: 1.8rem;
+    color: var(--secondary-glow);
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    line-height: 1; /* Ensure proper vertical alignment */
+}
+
+.recent-activity p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.recent-activity .time {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.quick-links ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+
+.quick-links a {
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.quick-links a:hover {
+    background: var(--primary-glow-transparent);
+    color: var(--primary-glow);
+    transform: translateY(-5px);
+    border-color: var(--primary-glow);
+}
+
+.quick-links a i {
+    font-size: 2rem; /* Larger icons */
+    line-height: 1;
+}

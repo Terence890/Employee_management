@@ -1,6 +1,5 @@
+import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
-import { tap } from 'rxjs/operators';
 
 export interface Department {
   id: number;
@@ -16,28 +15,36 @@ export interface Department {
 export class DepartmentsService {
   private http = inject(HttpClient);
   private departments = signal<Department[]>([]);
+  private readonly apiUrl = '/api/departments';
+
+  constructor() {
+    this.http.get<Department[]>(this.apiUrl).subscribe({
+      next: (departments) => this.departments.set(departments),
+      error: () => this.departments.set([]) // On error, set to empty array to avoid app crash
+    });
+  }
 
   getDepartments() {
     return this.departments;
   }
 
-  loadDepartments() {
-    return this.http.get<Department[]>('/api/departments').pipe(
-      tap(departments => this.departments.set(departments))
-    );
+  addDepartment(department: Omit<Department, 'id'>) {
+    this.http.post<Department>(this.apiUrl, department).subscribe(newDepartment => {
+      this.departments.update(departments => [...departments, newDepartment]);
+    });
   }
 
-  saveDepartment(department: Department) {
-    const save$ = department.id
-      ? this.http.put<Department>(`/api/departments/${department.id}`, department)
-      : this.http.post<Department>('/api/departments', department);
-
-    return save$.pipe(tap(() => this.loadDepartments().subscribe()));
+  updateDepartment(updatedDepartment: Department) {
+    this.http.put<Department>(`${this.apiUrl}/${updatedDepartment.id}`, updatedDepartment).subscribe(() => {
+      this.departments.update(departments =>
+        departments.map(dep => dep.id === updatedDepartment.id ? updatedDepartment : dep)
+      );
+    });
   }
 
   deleteDepartment(id: number) {
-    return this.http.delete(`/api/departments/${id}`).pipe(
-      tap(() => this.loadDepartments().subscribe())
-    );
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+      this.departments.update(departments => departments.filter(dep => dep.id !== id));
+    });
   }
 }

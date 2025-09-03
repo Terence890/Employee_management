@@ -1,0 +1,237 @@
+.employees-page {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.text-gradient {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.view-toggle {
+  display: flex;
+  background: var(--card-bg-color);
+  border-radius: 8px;
+  padding: 0.25rem;
+  border: 1px solid var(--card-border-color);
+}
+
+.view-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.view-toggle button.active {
+  background: var(--primary-glow);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.view-toggle button:not(.active):hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.view-toggle i {
+    font-size: 1.4rem;
+}
+
+.search-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--card-border-color);
+  border-radius: 8px;
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.add-button {
+  background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.add-button:hover {
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.employee-card {
+  background: rgba(23, 27, 42, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--card-border-color);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.employee-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 242, 255, 0.2), 0 0 15px rgba(0, 242, 255, 0.1);
+  border-color: rgba(0, 242, 255, 0.3);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--card-border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-header h3 {
+  font-size: 1.4rem;
+  color: var(--text-color);
+}
+
+.card-header p {
+  font-size: 1rem;
+  color: var(--primary-glow);
+}
+
+.card-body p {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--text-color-secondary);
+  margin: 0.5rem 0;
+}
+
+.card-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: var(--card-bg-color);
+  border-radius: 12px;
+  border: 1px solid var(--card-border-color);
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 1.25rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+th {
+  background: rgba(0,0,0,0.2);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.table-actions .action-button {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: var(--text-color-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  color: var(--primary-glow);
+}
+
+.delete-button:hover {
+  color: #ff4d4d;
+}
+
+.no-results, .no-results-table {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2rem;
+  color: var(--text-color-secondary);
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  background: var(--card-bg-color);
+  border-radius: 12px;
+  border: 1px solid var(--card-border-color);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 12, 23, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

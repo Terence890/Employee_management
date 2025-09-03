@@ -1,0 +1,119 @@
+:host {
+  --sidebar-width: 260px;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  font-family: var(--font-sans);
+}
+
+app-sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--card-bg-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid var(--card-border-color);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+}
+
+.content {
+  flex: 1;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+.mobile-header {
+  display: none;
+}
+
+.backdrop {
+  display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  app-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  app-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .content {
+    padding: 1.5rem;
+    padding-top: 6rem;
+  }
+
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 101;
+    border-bottom: 1px solid var(--card-border-color);
+  }
+
+  .logo a {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+  }
+
+  .backdrop.open {
+    display: block;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-glow);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-glow);
+}

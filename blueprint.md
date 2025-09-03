@@ -1,3 +1,4 @@
+
 # WorkZen Frontend
 
 ## Overview
@@ -17,19 +18,25 @@ WorkZen is built with the latest Angular features, including standalone componen
 - Modern CSS with native control flow
 - Routing with lazy loading
 
+### Data Flow
+- **HttpClient Integration:** All data services (`EmployeesService`, `DepartmentsService`) now use `HttpClient` to interact with a placeholder backend API (`/api/...`).
+- **Reactive Services:** Services fetch data in their constructors and expose data as signals, ensuring components are always up-to-date.
+- **CRUD Operations:** Components now use service methods that perform HTTP requests (`POST`, `PUT`, `DELETE`) to manage data.
+
 ### User Authentication
-- **AuthService:** Manages user login, registration, and logout functionality.
-- **AuthGuard:** Protects routes to ensure only authenticated users can access them.
-- **Signin/Signup Components:** Updated to use the `AuthService` for handling user authentication.
-- **Sidebar with Logout:** The main sidebar now includes a logout button.
+- **Futuristic UI with Glassmorphism:** The sign-in and sign-up pages feature a modern, dark theme with a semi-transparent, blurred "glass" effect.
+- **Interactive Elements:** Forms include interactive "glow" effects on focused inputs and buttons, providing visual feedback.
+- **Integrated Icons:** `Iconoir` icons are embedded within the input fields for a clean and intuitive user experience.
+- **Floating Labels:** Form labels animate to a "floating" position above the inputs when focused or filled.
+- **Auth Layout:** A dedicated `AuthLayoutComponent` for authentication pages.
 
 ### Design
-- Clean and modern UI
-- Responsive layout for mobile and web
-- Intuitive navigation
-- Visually balanced layout with clean spacing
-- Polished styles that are easy to understand
-- Use of `Iconoir` icon library for a professional look and feel
+- **Typography:** 
+    - Uses the `Exo 2` font from Google Fonts to create a clean, futuristic, and highly readable interface.
+    - **Heading Styles:** `h1` tags have a `linear-gradient` text effect, while `h2` and `h3` tags have distinct sizes and weights to create a strong visual hierarchy.
+- **Futuristic Aesthetic:** A clean and modern UI that leverages glassmorphism, glowing effects, and a dark theme.
+- **Iconography:** Uses the `Iconoir` icon library for a professional and consistent look and feel.
+- **Responsive Layout:** Adapts seamlessly to both mobile and web devices.
 
 ### Responsiveness
 - Collapsible sidebar for mobile devices
@@ -37,7 +44,10 @@ WorkZen is built with the latest Angular features, including standalone componen
 - Fluid-width modal for the department form
 
 ### Components
-- **Dashboard:** Initial dashboard component.
+- **Dashboard:**
+  - Modernized UI with a futuristic glassmorphism design.
+  - Light and dark theme support.
+  - Real-time stats for employees and departments.
 - **Departments:**
   - View a list of departments.
   - Search for departments.
@@ -53,6 +63,7 @@ WorkZen is built with the latest Angular features, including standalone componen
   - View a list of employees
   - Add, edit and delete employees
   - Search for employees
+- **Reactive Forms:** All forms in the application now use `ReactiveFormsModule` for robust validation and data management.
 
 ## Current Plan
 
@@ -75,12 +86,13 @@ WorkZen is built with the latest Angular features, including standalone componen
 - [x] Implement add, edit, and delete functionality.
 - [x] Make the departments page responsive.
 
-### Phase 4: User Authentication
+### Phase 4: Foundational Authentication UI
 
-- [x] Create `AuthService` for login, registration, and logout.
-- [x] Create `AuthGuard` to protect routes.
-- [x] Update `signin` and `signup` components.
-- [x] Add a logout button to the sidebar.
+- [x] Create standalone `signin.component.ts` and `signup.component.ts` with reactive forms.
+- [x] Design a shared, modern stylesheet (`auth.shared.css`) for a consistent look and feel.
+- [x] Implement a dedicated `auth-layout.component.ts` for the authentication flow.
+- [x] Configure routes to correctly display sign-in and sign-up pages.
+- [x] Ensure form submissions have placeholder logic within the components.
 
 ### Phase 5: Profile Page
 
@@ -113,13 +125,52 @@ WorkZen is built with the latest Angular features, including standalone componen
     - [x] Implement the theme-switching functionality.
     - [x] Implement the notification settings functionality.
 
-### Phase 9: Dashboard Enhancement (Next)
+### Phase 9: Dashboard Enhancement
 
-- [ ] **Dashboard Widgets:**
-    - [ ] Create a "Stats" widget to show the total number of employees and departments.
-    - [ ] Create a "Recent Activity" widget (mock data).
-    - [ ] Create a "Quick Links" widget.
-- [ ] **Dashboard Layout:**
-    - [ ] Design a responsive grid layout for the dashboard widgets.
-- [ ] **Data Integration:**
-    - [ ] Connect the "Stats" widget to the `EmployeeService` and `DepartmentService`.
+- [x] **Dashboard UI:**
+    - [x] Implement a futuristic glassmorphism design.
+    - [x] Add support for light and dark themes.
+    - [x] Create a responsive grid layout.
+- [x] **Dashboard Widgets:**
+    - [x] Create a "Stats" widget to show the total number of employees and departments.
+    - [x] Create a "Recent Activity" widget (mock data).
+
+### Phase 10: Service and Form Refactoring
+
+- [x] **Service Layer:**
+    - [x] Refactor `EmployeesService` and `DepartmentsService` to use `HttpClient` for data fetching from a placeholder API.
+    - [x] Services now fetch initial data in the constructor.
+    - [x] CRUD methods (`add`, `update`, `delete`) now perform HTTP requests and update local signals on success.
+- [x] **Component Integration:**
+    - [x] Update `EmployeesComponent` and `DepartmentsComponent` to use the refactored service methods.
+- [x] **Form Modernization:**
+    - [x] Refactor `DepartmentFormComponent` and `EmployeeFormComponent` to use `ReactiveFormsModule`.
+- [x] **Data Integration:**
+    - [x] Connect the Dashboard's "Stats" widget to the live data from `EmployeeService` and `DepartmentService`.
+
+### Phase 11: Authentication UI Redesign
+
+- [x] **Stylesheet Overhaul:**
+    - [x] Redesigned `auth.shared.css` to implement a futuristic, glassmorphism UI.
+    - [x] Added interactive "glow" effects for buttons and inputs.
+- [x] **Template Updates:**
+    - [x] Updated `signin.component.ts` and `signup.component.ts` templates.
+    - [x] Integrated `Iconoir` icons directly into the input fields.
+    - [x] Implemented a floating label user experience.
+
+### Phase 12: Typography Enhancement
+
+- [x] **Font Implementation:** 
+    - [x] Imported the `Exo 2` font from Google Fonts.
+    - [x] Set `Exo 2` as the default font for the entire application.
+- [x] **Header Styles:** 
+    - [x] Applied a `linear-gradient` to `h1` tags for a striking visual effect.
+    - [x] Added distinct sizes and weights to `h2` and `h3` tags to create a clear visual hierarchy.
+- [x] **Bug Fixes:**
+    - [x] Fixed an issue where the `h1` gradient was unreadable in the light theme.
+
+### Phase 13: Final Touches (Next)
+
+- [ ] **Code Refinement:** Review and refactor the codebase for any remaining inconsistencies.
+- [ ] **Documentation:** Update comments and documentation.
+- [ ] **Final Build:** Perform a final build to ensure everything is in order.

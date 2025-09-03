@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { AuthService } from '../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,8 @@ export class ProfileComponent {
 
   user = this.authService.user;
   profileForm: FormGroup;
+  successMessage = signal<string | null>(null);
+  errorMessage = signal<string | null>(null);
 
   constructor() {
     const currentUser = this.user();
@@ -27,7 +30,16 @@ export class ProfileComponent {
 
   updateProfile() {
     if (this.profileForm.valid) {
-      this.authService.updateUser(this.profileForm.value);
+      this.authService.updateUser(this.profileForm.value).subscribe({
+        next: () => {
+          this.successMessage.set('Profile updated successfully!');
+          this.errorMessage.set(null);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage.set(err.error?.message || 'An unexpected error occurred.');
+          this.successMessage.set(null);
+        }
+      });
     }
   }
 
