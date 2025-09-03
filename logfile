@@ -1,0 +1,19 @@
+2025-09-03 12:24:08.154 UTC [47985] LOG:  starting PostgreSQL 15.7 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 12.3.0, 64-bit
+2025-09-03 12:24:08.154 UTC [47985] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-09-03 12:24:08.157 UTC [47985] FATAL:  could not create lock file "/run/postgresql/.s.PGSQL.5432.lock": No such file or directory
+2025-09-03 12:24:08.161 UTC [47985] LOG:  database system is shut down
+2025-09-03 12:25:21.989 UTC [48217] LOG:  starting PostgreSQL 15.7 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 12.3.0, 64-bit
+2025-09-03 12:25:21.989 UTC [48217] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-09-03 12:25:21.994 UTC [48217] LOG:  listening on Unix socket "/run/postgresql/.s.PGSQL.5432"
+2025-09-03 12:25:22.006 UTC [48220] LOG:  database system was shut down at 2025-09-03 12:23:42 UTC
+2025-09-03 12:25:22.017 UTC [48217] LOG:  database system is ready to accept connections
+2025-09-03 12:25:28.535 UTC [48249] LOG:  invalid length of startup packet
+2025-09-03 12:25:28.552 UTC [48250] LOG:  invalid length of startup packet
+2025-09-03 12:27:03.886 UTC [48545] FATAL:  database "user" does not exist
+2025-09-03 12:28:26.951 UTC [48806] FATAL:  database "user" does not exist
+2025-09-03 12:30:22.092 UTC [48218] LOG:  checkpoint starting: time
+2025-09-03 12:32:02.159 UTC [48218] LOG:  checkpoint complete: wrote 999 buffers (6.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=99.940 s, sync=0.116 s, total=100.067 s; sync files=325, longest=0.003 s, average=0.001 s; distance=4692 kB, estimate=4692 kB
+2025-09-03 13:17:10.564 UTC [4115] LOG:  starting PostgreSQL 15.7 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 12.3.0, 64-bit
+2025-09-03 13:17:10.564 UTC [4115] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-09-03 13:17:10.570 UTC [4115] FATAL:  could not create lock file "/run/postgresql/.s.PGSQL.5432.lock": No such file or directory
+2025-09-03 13:17:10.578 UTC [4115] LOG:  database system is shut down

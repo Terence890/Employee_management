@@ -6,9 +6,13 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.nodejs_20
+    pkgs.jdk # Add the JDK package
   ];
   # Sets environment variables in the workspace
-  env = {};
+  env = {
+    # Set the JAVA_HOME environment variable
+    JAVA_HOME = "${pkgs.jdk}";
+  };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [

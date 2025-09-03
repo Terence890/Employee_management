@@ -1,0 +1,50 @@
+:host {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --text-color: #fff;
+  --background-color: #121212;
+  --header-background: rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: var(--header-background);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin-left: 2rem;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--primary-color);
+}
+
+.content {
+  padding-top: 100px; /* Adjust for fixed header */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}

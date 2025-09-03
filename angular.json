@@ -25,6 +25,7 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ]
           },
@@ -59,7 +60,8 @@
               "buildTarget": "myapp:build:production"
             },
             "development": {
-              "buildTarget": "myapp:build:development"
+              "buildTarget": "myapp:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -88,5 +90,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "3fac2b93-c13f-4415-befb-355a86f4d1d1"
   }
 }
