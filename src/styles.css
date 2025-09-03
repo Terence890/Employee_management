@@ -1,43 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  --primary-glow: #00f0ff;
-  --secondary-glow: #ff00f0;
-  --primary-glow-transparent: rgba(0, 240, 255, 0.5);
-  --secondary-glow-transparent: rgba(255, 0, 240, 0.5);
-  --background-dark: #0A0E21; /* Deep space blue */
-  --background-light: #f0f2f5;
-  --text-color-dark: #E0E6F1; /* Light sky blue */
-  --text-color-light: #1A202C;
-  --card-bg-dark: rgba(23, 27, 48, 0.6);
-  --card-bg-light: rgba(255, 255, 255, 0.8);
-  --card-border-dark: rgba(255, 255, 255, 0.1);
-  --card-border-light: rgba(0, 0, 0, 0.1);
-  --primary-color: #00B5CC;
-  --secondary-color: #D43FEE;
+  --primary-color: #6D28D9;
+  --secondary-color: #EDE9FE;
+  --accent-color: #F59E0B;
+  --success-color: #10B981;
+  --error-color: #EF4444;
+
+  --background-light: #F8FAFC;
+  --background-dark: #0F172A;
+  --text-light: #0F172A;
+  --text-dark: #F8FAFC;
+
+  --card-bg-light: #FFFFFF;
+  --card-bg-dark: #1E293B;
+  --card-border-light: #E2E8F0;
+  --card-border-dark: #334155;
 }
 
 body {
   margin: 0;
-  font-family: 'Exo 2', sans-serif;
+  font-family: 'Inter', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
-  background: var(--background-dark);
-  color: var(--text-color-dark);
+  background: var(--background-light);
+  color: var(--text-light);
 }
 
 body.dark-theme {
-  background-color: var(--background-dark);
-  color: var(--text-color-dark);
-  --card-bg-color: var(--card-bg-dark);
-  --card-border-color: var(--card-border-dark);
+  background: var(--background-dark);
+  color: var(--text-dark);
+  background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.04"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
 }
 
 body.light-theme {
-  background-color: var(--background-light);
-  color: var(--text-color-light);
-  --card-bg-color: var(--card-bg-light);
-  --card-border-color: var(--card-border-light);
+  background: var(--background-light);
+  color: var(--text-light);
 }
 
 * {
@@ -45,7 +43,7 @@ body.light-theme {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Exo 2', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 0.75rem;
@@ -54,65 +52,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 900;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
 }
 
 h2 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--card-border-dark);
-}
-
-.light-theme h2 {
-    border-bottom-color: var(--card-border-light);
 }
 
 h3 {
   font-size: 1.75rem;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
 h4 {
   font-size: 1.25rem;
   font-weight: 500;
-}
-
-.text-gradient {
-    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    display: inline-block;
-}
-
-.light-theme .text-gradient {
-    background: none;
-    -webkit-text-fill-color: inherit;
-    text-fill-color: inherit;
-}
-
-
-/* Iconoir styles */
-.iconoir-font {
-    font-family: 'iconoir' !important;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-feature-settings: "liga";
-    -moz-font-feature-settings: "liga=1";
-    -moz-font-feature-settings: "liga";
-    -ms-font-feature-settings: "liga" 1;
-    font-feature-settings: "liga";
-    -webkit-font-variant-ligatures: discretionary-ligatures;
-    font-variant-ligatures: discretionary-ligatures;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
