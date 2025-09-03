@@ -58,16 +58,24 @@ We use the "Inter" font family for its excellent readability and modern, profess
 
 ## 3. Current Implementation Plan
 
-### Phase 2: UI Polish & Glassmorphism (In Progress)
+### Phase 3: Employee Profile Pictures
 
-1.  **[COMPLETED]** **Blueprint:** Update the blueprint with the new UI refinements.
-2.  **[ACTIVE]** **Glassmorphism Card:** Apply a `backdrop-filter` to the `.auth-card`.
-3.  **Icon & Text Alignment:** Use Flexbox to align icons and text in input fields.
-4.  **Refined Floating Label:** Reposition the floating label to eliminate the "ghost line".
-5.  **Verification:** Run `ng build` to ensure no compilation errors.
+1.  **[COMPLETED]** **Update Employee Model:** Added `photoUrl` to the `Employee` interface in `employees.service.ts`.
+2.  **[COMPLETED]** **Update Service:** Modified `EmployeesService` to handle `photoUrl`, including a default placeholder.
+3.  **[COMPLETED]** **Display Avatars:** Updated `employees.component.html` to display employee avatars in both card and list views.
+4.  **[COMPLETED]** **Image Upload Form:** Updated `employee-form.component.ts` and created `employee-form.component.html` to allow users to upload and preview profile pictures.
+5.  **[COMPLETED]** **Styling:** Created `employee-form.component.css` for the form.
+6.  **[COMPLETED]** **Bug Fix:** Fixed a template binding error in `employee-form.component.html` by adding a getter to `employee-form.component.ts`.
+7.  **[COMPLETED]** **Verification:** Ran `ng build` to ensure no compilation errors.
 
-### Previous Phases
+## 4. Previous Phases
 
+*   **Phase 2: UI Polish & Glassmorphism**
+    *   **Blueprint:** Updated the blueprint with the new UI refinements.
+    *   **Glassmorphism Card:** Applied a `backdrop-filter` to the `.auth-card`.
+    *   **Icon & Text Alignment:** Use Flexbox to align icons and text in input fields.
+    *   **Refined Floating Label:** Reposition the floating label to eliminate the "ghost line".
+    *   **Verification:** Ran `ng build` to ensure no compilation errors.
 *   **Phase 1: Foundation & Branding**
     *   Created the initial `blueprint.md`.
     *   Updated `src/styles.css` with a new color palette and typography.

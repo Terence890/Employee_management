@@ -1,9 +1,6 @@
 :host {
-    --primary-glow: #00f2ff;
-    --secondary-glow: #a800ff;
-    --card-background: rgba(16, 16, 32, 0.8);
-    --border-color: rgba(0, 242, 255, 0.2);
-    --text-color: #e0e0e0;
+    --primary-glow: var(--primary-color);
+    --secondary-glow: var(--accent-color);
 }
 
 .settings-container {
@@ -32,15 +29,24 @@
 }
 
 .settings-card {
-    background: var(--card-background);
+    background: var(--card-bg-light);
     border-radius: 12px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--card-border-light);
     padding: 2rem;
+}
+
+.dark-theme .settings-card {
+    background: var(--card-bg-dark);
+    border-color: var(--card-border-dark);
 }
 
 .setting-item {
     padding: 2rem 0;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--card-border-light);
+}
+
+.dark-theme .setting-item {
+    border-bottom-color: var(--card-border-dark);
 }
 
 .setting-item:last-child {
@@ -50,7 +56,6 @@
 .setting-item h2 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
-    color: var(--text-color);
 }
 
 .setting-item p {
@@ -110,7 +115,6 @@
 
 .toggle-switch label {
     font-size: 1.1rem;
-    color: var(--text-color);
 }
 
 .toggle-switch input[type="checkbox"] {

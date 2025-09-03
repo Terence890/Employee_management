@@ -8,6 +8,7 @@ export interface Employee {
   department: string;
   position: string;
   hireDate: string;
+  photoUrl?: string;
 }
 
 @Injectable({
@@ -20,7 +21,7 @@ export class EmployeesService {
 
   constructor() {
     this.http.get<Employee[]>(this.apiUrl).subscribe({
-      next: (employees) => this.employees.set(employees),
+      next: (employees) => this.employees.set(employees.map(e => ({...e, photoUrl: e.photoUrl || 'https://st.depositphotos.com/2218212/4603/i/450/depositphotos_46032985-stock-photo-sample-blue-square-grungy-stamp.jpg' }))),
       error: () => this.employees.set([]) // On error, set to empty array to avoid app crash
     });
   }
@@ -31,7 +32,7 @@ export class EmployeesService {
 
   addEmployee(employee: Omit<Employee, 'id'>) {
     this.http.post<Employee>(this.apiUrl, employee).subscribe(newEmployee => {
-      this.employees.update(employees => [...employees, newEmployee]);
+      this.employees.update(employees => [...employees, {...newEmployee, photoUrl: 'https://st.depositphotos.com/2218212/4603/i/450/depositphotos_46032985-stock-photo-sample-blue-square-grungy-stamp.jpg' }]);
     });
   }
 

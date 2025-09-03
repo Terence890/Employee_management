@@ -22,17 +22,22 @@
   align-items: center;
   justify-content: flex-start; /* Aligns content to the start */
   padding: 1.5rem;
-  background: var(--card-bg-color);
+  background: var(--card-bg-light);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 12px;
-  border: 1px solid var(--card-border-color);
+  border: 1px solid var(--card-border-light);
   transition: all 0.3s ease;
+}
+
+.dark-theme .stat-card {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--primary-glow);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--primary-color);
 }
 
 .stat-icon {
@@ -41,7 +46,7 @@
   justify-content: center;
   font-size: 2.2rem;
   margin-right: 1.5rem;
-  color: var(--primary-glow);
+  color: var(--primary-color);
 }
 
 .stat-info .stat-value {
@@ -64,11 +69,16 @@
 
 .main-widget {
   padding: 2rem;
-  background: var(--card-bg-color);
+  background: var(--card-bg-light);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 12px;
-  border: 1px solid var(--card-border-color);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .main-widget {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 .widget-title {
@@ -88,7 +98,11 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--card-border-color);
+  border-bottom: 1px solid var(--card-border-light);
+}
+
+.dark-theme .recent-activity li {
+  border-bottom: 1px solid var(--card-border-dark);
 }
 
 .recent-activity li:last-child {
@@ -97,7 +111,7 @@
 
 .recent-activity .icon {
     font-size: 1.8rem;
-    color: var(--secondary-glow);
+    color: var(--secondary-color);
     flex-shrink: 0; /* Prevent icon from shrinking */
     line-height: 1; /* Ensure proper vertical alignment */
 }
@@ -129,17 +143,21 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-light);
     transition: all 0.3s ease;
     text-align: center;
     border: 1px solid transparent;
 }
 
+.dark-theme .quick-links a {
+    color: var(--text-dark);
+}
+
 .quick-links a:hover {
-    background: var(--primary-glow-transparent);
-    color: var(--primary-glow);
+    background: var(--primary-color);
+    color: white;
     transform: translateY(-5px);
-    border-color: var(--primary-glow);
+    border-color: var(--primary-color);
 }
 
 .quick-links a i {

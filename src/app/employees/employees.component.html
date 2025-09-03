@@ -23,6 +23,7 @@
       @for (employee of filteredEmployees(); track employee.id) {
         <div class="employee-card">
           <div class="card-header">
+            <img [src]="employee.photoUrl" alt="{{ employee.name }}" class="employee-avatar">
             <h3>{{ employee.name }}</h3>
             <p>{{ employee.position }}</p>
           </div>
@@ -52,6 +53,7 @@
       <table>
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Email</th>
             <th>Department</th>
@@ -63,6 +65,7 @@
         <tbody>
           @for (employee of filteredEmployees(); track employee.id) {
             <tr>
+              <td><img [src]="employee.photoUrl" alt="{{ employee.name }}" class="employee-avatar-list"></td>
               <td>{{ employee.name }}</td>
               <td>{{ employee.email }}</td>
               <td>{{ employee.department }}</td>
@@ -80,7 +83,7 @@
           }
           @if (filteredEmployees().length === 0) {
             <tr>
-              <td colspan="6" class="no-results-table">No employees found.</td>
+              <td colspan="7" class="no-results-table">No employees found.</td>
             </tr>
           }
         </tbody>

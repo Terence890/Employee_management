@@ -7,14 +7,14 @@
   <div class="settings-card">
     <div class="setting-item">
       <h2>Theme</h2>
-      <p>Choose between a light or dark theme for the application.</p>
-      <div class="theme-switcher">
-        <button (click)="updateTheme('light')" [class.active]="theme() === 'light'" class="theme-button light-button">
-          <i class="icon iconoir-sun-light"></i> Light
-        </button>
-        <button (click)="updateTheme('dark')" [class.active]="theme() === 'dark'" class="theme-button dark-button">
-          <i class="icon iconoir-half-moon"></i> Dark
-        </button>
+      <p>Switch between light and dark themes.</p>
+      <div class="toggle-switch">
+        <label for="theme-toggle">{{ isDarkTheme() ? 'Dark Mode' : 'Light Mode' }}</label>
+        <input type="checkbox" id="theme-toggle" [checked]="isDarkTheme()" (change)="toggleTheme()" class="theme-toggle-checkbox">
+        <label for="theme-toggle" class="toggle-label">
+          <i class="iconoir-sun-light"></i>
+          <i class="iconoir-half-moon"></i>
+        </label>
       </div>
     </div>
 
@@ -25,12 +25,10 @@
         <div class="toggle-switch">
           <label for="emailNotifications">Email Notifications</label>
           <input type="checkbox" id="emailNotifications" [checked]="settings().emailNotifications" (change)="updateEmailNotifications($event.target.checked)">
-          <span class="slider"></span>
         </div>
         <div class="toggle-switch">
           <label for="pushNotifications">Push Notifications</label>
           <input type="checkbox" id="pushNotifications" [checked]="settings().pushNotifications" (change)="updatePushNotifications($event.target.checked)">
-          <span class="slider"></span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ThemeService } from '../core/theme.service';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,15 +12,15 @@ import { ThemeService } from '../core/theme.service';
 })
 export class SettingsComponent {
   private themeService = inject(ThemeService);
-  theme = this.themeService.theme;
+  isDarkTheme = this.themeService.isDarkTheme;
 
   settings = signal({
     emailNotifications: true,
     pushNotifications: false,
   });
 
-  updateTheme(theme: string) {
-    this.themeService.setTheme(theme);
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 
   updateEmailNotifications(enabled: boolean) {

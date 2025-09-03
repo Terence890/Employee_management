@@ -1,0 +1,32 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-form">
+  <h2>{{ employee() ? 'Edit' : 'Add' }} Employee</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="department">Department</label>
+    <input type="text" id="department" formControlName="department">
+  </div>
+  <div class="form-group">
+    <label for="position">Position</label>
+    <input type="text" id="position" formControlName="position">
+  </div>
+  <div class="form-group">
+    <label for="photo">Photo</label>
+    <input type="file" id="photo" (change)="onFileChange($event)">
+  </div>
+  @if (photoUrl.value) {
+    <div class="image-preview">
+      <img [src]="photoUrl.value" alt="Employee Photo">
+    </div>
+  }
+  <div class="form-actions">
+    <button type="button" (click)="close.emit()" class="cancel-button">Cancel</button>
+    <button type="submit" [disabled]="employeeForm.invalid" class="save-button">Save</button>
+  </div>
+</form>
