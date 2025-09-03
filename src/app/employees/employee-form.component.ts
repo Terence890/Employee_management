@@ -1,189 +1,115 @@
-import { ChangeDetectionStrategy, Component, output, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, input, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from './employees.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   template: `
-    <div class="form-overlay" (click)="close.emit()">
-      <div class="form-container" (click)="$event.stopPropagation()">
-        <h2>{{ employee() ? 'Edit' : 'Add' }} Employee</h2>
-        <form (ngSubmit)="save()">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" [(ngModel)]="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" required>
-          </div>
-          <div class="form-group">
-            <label for="department">Department</label>
-            <input type="text" id="department" name="department" [(ngModel)]="department" required>
-          </div>
-          <div class="form-group">
-            <label for="position">Position</label>
-            <input type="text" id="position" name="position" [(ngModel)]="position" required>
-          </div>
-          <div class="form-group">
-            <label for="salary">Salary</label>
-            <input type="number" id="salary" name="salary" [(ngModel)]="salary" required>
-          </div>
-          <div class="form-actions">
-            <button type="button" (click)="close.emit()">Cancel</button>
-            <button type="submit">Save</button>
-          </div>
-        </form>
+    <form [formGroup]="employeeForm" (ngSubmit)="save.emit(employeeForm.value)" class="employee-form">
+      <h2>{{ employee() ? 'Edit' : 'Add' }} Employee</h2>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name">
       </div>
-    </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" id="department" formControlName="department">
+      </div>
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input type="text" id="position" formControlName="position">
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="close.emit()" class="cancel-button">Cancel</button>
+        <button type="submit" [disabled]="employeeForm.invalid" class="save-button">Save</button>
+      </div>
+    </form>
   `,
   styles: [`
-    .form-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
-    }
-
-    .form-container {
-      background: #1a1a2e;
+    .employee-form {
+      background: #1c1c1c;
       padding: 2rem;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-      border: 1px solid rgba(0, 242, 255, 0.2);
+      border-radius: 8px;
+      width: 400px;
     }
-
     h2 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .form-group {
+      font-size: 1.5rem;
       margin-bottom: 1.5rem;
     }
-
+    .form-group {
+      margin-bottom: 1rem;
+    }
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: #e0e0e0;
-      font-size: 1rem;
+      color: #aaa;
     }
-
-    input,
-    textarea {
+    input {
       width: 100%;
-      padding: 0.8rem 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(0, 242, 255, 0.2);
-      color: #fff;
+      padding: 0.75rem 1rem;
+      border: 1px solid #333;
       border-radius: 8px;
+      background: #222;
+      color: #fff;
       font-size: 1rem;
-      transition: all 0.3s ease;
-      box-sizing: border-box;
     }
-
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #00f2ff;
-      box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-    }
-
     .form-actions {
       display: flex;
       justify-content: flex-end;
       gap: 1rem;
       margin-top: 2rem;
     }
-
-    button {
-      padding: 0.8rem 1.5rem;
+    .cancel-button {
+      background: #333;
+      color: #fff;
       border: none;
+      padding: 0.75rem 1.5rem;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
     }
-
-    button[type="submit"] {
-      background: linear-gradient(90deg, #00f2ff, #a800ff);
+    .save-button {
+      background: #007bff;
       color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
     }
-
-    button[type="submit"]:hover {
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    .save-button:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
-
-    button[type="button"] {
-      background: transparent;
-      border: 1px solid rgba(0, 242, 255, 0.2);
-      color: #e0e0e0;
-    }
-
-    button[type="button"]:hover {
-      background: rgba(0, 242, 255, 0.1);
-      color: #fff;
-    }
-    
-    @media (max-width: 500px) {
-        .form-actions {
-            flex-direction: column;
-        }
-        
-        button {
-            width: 100%;
-        }
-    }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmployeeFormComponent implements OnInit {
   employee = input<Employee | null>(null);
   close = output<void>();
-  saveEmployee = output<Employee>();
+  save = output<Employee>();
 
-  name = '';
-  email = '';
-  department = '';
-  position = '';
-  salary = 0;
+  private fb = inject(FormBuilder);
+  employeeForm: FormGroup;
+
+  constructor() {
+    this.employeeForm = this.fb.group({
+      id: [null],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      department: ['', Validators.required],
+      position: ['', Validators.required],
+      hireDate: [new Date().toISOString().split('T')[0]]
+    });
+  }
 
   ngOnInit() {
     const currentEmployee = this.employee();
     if (currentEmployee) {
-      this.name = currentEmployee.name;
-      this.email = currentEmployee.email;
-      this.department = currentEmployee.department;
-      this.position = currentEmployee.position;
-      this.salary = currentEmployee.salary;
+      this.employeeForm.patchValue(currentEmployee);
     }
-  }
-
-  save() {
-    const currentEmployee = this.employee();
-    const employeeToSave: Employee = {
-      id: currentEmployee ? currentEmployee.id : 0,
-      name: this.name,
-      email: this.email,
-      department: this.department,
-      position: this.position,
-      salary: this.salary,
-    };
-
-    this.saveEmployee.emit(employeeToSave);
-    this.close.emit();
   }
 }

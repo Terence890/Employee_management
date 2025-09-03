@@ -5,8 +5,10 @@ import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 export interface User {
+  id: string;
   name: string;
   email: string;
+  avatar?: string;
 }
 
 @Injectable({
@@ -16,16 +18,22 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private currentUser = signal<User | null>(null);
+  user = signal<User | null>(null);
 
-  get currentUserValue() {
-    return this.currentUser();
+  constructor() {
+    const mockUser: User = {
+      id: '1',
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d'
+    };
+    this.user.set(mockUser);
   }
 
   login(credentials: {email: string, password: string}):Observable<any> {
-    return this.http.post('/api/auth/login', credentials).pipe(
+    return of({ id: '1', name: 'John Doe', email: credentials.email, avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d' }).pipe(
       tap((user: any) => {
-        this.currentUser.set(user);
+        this.user.set(user);
         this.router.navigate(['/']);
       }),
       catchError(error => {
@@ -36,9 +44,9 @@ export class AuthService {
   }
 
   register(user: {name: string, email: string, password: string}):Observable<any> {
-    return this.http.post('/api/auth/register', user).pipe(
-      tap((user: any) => {
-        this.currentUser.set(user);
+     return of({ id: '2', ...user, avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704e' }).pipe(
+      tap((newUser: any) => {
+        this.user.set(newUser);
         this.router.navigate(['/']);
       }),
       catchError(error => {
@@ -48,8 +56,19 @@ export class AuthService {
     );
   }
 
+  updateUser(updatedInfo: { name: string, email: string }): Observable<User | null> {
+    const currentUser = this.user();
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...updatedInfo };
+      this.user.set(updatedUser);
+      return of(updatedUser);
+    }
+    return of(null);
+  }
+
+
   logout() {
-    this.currentUser.set(null);
+    this.user.set(null);
     this.router.navigate(['/signin']);
   }
 }

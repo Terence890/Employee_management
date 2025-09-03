@@ -42,9 +42,17 @@ WorkZen is built with the latest Angular features, including standalone componen
   - View a list of departments.
   - Search for departments.
   - Add, edit, and delete departments.
-- **Employees:** (Upcoming)
-- **Profile:** (Upcoming)
-- **Settings:** (Upcoming)
+- **Profile:**
+  - View user profile information (email and name).
+  - Update profile information.
+- **Settings:**
+  - Manage application settings.
+  - Toggle between light and dark themes.
+  - Enable or disable email and push notifications.
+- **Employees:**
+  - View a list of employees
+  - Add, edit and delete employees
+  - Search for employees
 
 ## Current Plan
 
@@ -74,12 +82,44 @@ WorkZen is built with the latest Angular features, including standalone componen
 - [x] Update `signin` and `signup` components.
 - [x] Add a logout button to the sidebar.
 
-### Phase 5: Employees Feature (Current)
+### Phase 5: Profile Page
 
-- [ ] Create the `employees` directory.
-- [ ] Create `employees.service.ts` to manage employee data.
-- [ ] Create `employees.component.ts` to display the employee list.
-- [ ] Add a route for `/employees` in `app.routes.ts`.
-- [ ] Create `employee-form.component.ts` for adding and editing employees.
-- [ ] Integrate the form with the employee list.
-- [ ] Ensure the employees page is responsive.
+- [x] Create the `ProfileComponent`.
+- [x] Design the profile page UI.
+- [x] Integrate the `AuthService` to display user data.
+
+### Phase 6: Settings Page
+
+- [x] Create the `SettingsComponent`.
+- [x] Design the settings page UI.
+- [x] Implement theme selection and notification preferences.
+
+### Phase 7: Employees Feature
+
+- [x] Create the `employees` directory.
+- [x] Create `employees.service.ts` to manage employee data.
+- [x] Create `employees.component.ts` to display the employee list.
+- [x] Add a route for `/employees` in `app.routes.ts`.
+- [x] Create `employee-form.component.ts` for adding and editing employees.
+- [x] Integrate the form with the employee list.
+- [x] Ensure the employees page is responsive.
+
+### Phase 8: Profile & Settings
+
+- [x] **Profile Page:**
+    - [x] Add the ability to update user profile information.
+    - [x] Add a profile picture upload feature.
+- [x] **Settings Page:**
+    - [x] Implement the theme-switching functionality.
+    - [x] Implement the notification settings functionality.
+
+### Phase 9: Dashboard Enhancement (Next)
+
+- [ ] **Dashboard Widgets:**
+    - [ ] Create a "Stats" widget to show the total number of employees and departments.
+    - [ ] Create a "Recent Activity" widget (mock data).
+    - [ ] Create a "Quick Links" widget.
+- [ ] **Dashboard Layout:**
+    - [ ] Design a responsive grid layout for the dashboard widgets.
+- [ ] **Data Integration:**
+    - [ ] Connect the "Stats" widget to the `EmployeeService` and `DepartmentService`.

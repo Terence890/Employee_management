@@ -1,0 +1,26 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>Your Profile</h1>
+    <p>Manage your personal information and preferences.</p>
+  </div>
+
+  <div class="profile-card">
+    <div class="profile-picture-section">
+      <img [src]="user()?.avatar || 'assets/placeholder-avatar.png'" alt="Profile Picture" class="profile-picture">
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput hidden>
+      <button (click)="fileInput.click()" class="upload-button">Change Picture</button>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" formControlName="email">
+      </div>
+      <button type="submit" [disabled]="profileForm.invalid || profileForm.pristine" class="save-button">Save Changes</button>
+    </form>
+  </div>
+</div>

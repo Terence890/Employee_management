@@ -1,0 +1,156 @@
+:host {
+    --primary-glow: #00f2ff;
+    --secondary-glow: #a800ff;
+    --card-background: rgba(16, 16, 32, 0.8);
+    --border-color: rgba(0, 242, 255, 0.2);
+    --text-color: #e0e0e0;
+}
+
+.settings-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.settings-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.settings-header h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.settings-header p {
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+.settings-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+}
+
+.setting-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.setting-item p {
+    color: #aaa;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    display: flex;
+    gap: 1rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 0.5rem;
+    width: fit-content;
+}
+
+.theme-button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.theme-button .icon {
+    font-size: 1.4rem;
+}
+
+.theme-button.active {
+    background: var(--primary-glow);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+/* Toggle Switch */
+.notification-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+.toggle-switch label {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.toggle-switch input[type="checkbox"] {
+    position: relative;
+    width: 50px;
+    height: 28px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(0,0,0,0.3);
+    outline: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    top: 3px;
+    left: 4px;
+    background: #fff;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+    background: var(--primary-glow);
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+    transform: translateX(22px);
+}
+
+@media (max-width: 768px) {
+    .settings-card {
+        padding: 1rem;
+    }
+    .setting-item {
+        padding: 1.5rem 0.5rem;
+    }
+}

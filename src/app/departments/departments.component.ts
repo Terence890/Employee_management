@@ -236,7 +236,7 @@ import { DepartmentFormComponent } from './department-form.component';
 })
 export class DepartmentsComponent {
   private departmentsService = inject(DepartmentsService);
-  departments = signal<Department[]>([]);
+  departments = this.departmentsService.getDepartments();
 
   searchTerm = signal('');
   isFormOpen = signal(false);
@@ -251,11 +251,7 @@ export class DepartmentsComponent {
   });
 
   constructor() {
-    this.loadDepartments();
-  }
-
-  loadDepartments() {
-    this.departmentsService.getDepartments().subscribe(departments => this.departments.set(departments));
+    this.departmentsService.loadDepartments().subscribe();
   }
   
   openForm(department: Department | null = null) {
@@ -269,13 +265,13 @@ export class DepartmentsComponent {
   }
   
   saveDepartment(department: Department) {
-    this.departmentsService.saveDepartment(department).subscribe(() => this.loadDepartments());
+    this.departmentsService.saveDepartment(department).subscribe();
     this.closeForm();
   }
   
   deleteDepartment(id: number) {
     if (confirm('Are you sure you want to delete this department?')) {
-      this.departmentsService.deleteDepartment(id).subscribe(() => this.loadDepartments());
+      this.departmentsService.deleteDepartment(id).subscribe();
     }
   }
 }

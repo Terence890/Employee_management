@@ -1,24 +1,17 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { EmployeesService } from '../employees/employees.service';
+import { DepartmentsService } from '../departments/departments.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [CommonModule],
   template: `
     <div class="dashboard-header">
       <h1>Welcome back, Admin!</h1>
       <p>Here's a snapshot of your organization's activities.</p>
     </div>
     <div class="dashboard-grid">
-      <div class="card tasks-overview">
-        <div class="card-header">
-          <i class="icon iconoir-task-list"></i>
-          <h3>Tasks Overview</h3>
-        </div>
-        <div class="card-body">
-          <p class="stat">{{ pendingTasks() }}</p>
-          <p class="label">Pending Tasks</p>
-        </div>
-      </div>
       <div class="card departments-overview">
         <div class="card-header">
           <i class="icon iconoir-building"></i>
@@ -201,16 +194,28 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
         color: #aaa;
         font-size: 0.9rem;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent {
-  pendingTasks = signal(5);
-  activeDepartments = signal(3);
-  totalEmployees = signal(15);
-  recentActivity = signal([
-    { id: 1, icon: 'iconoir-user-plus', description: 'New employee added: John Doe', time: '2h ago' },
-    { id: 2, icon: 'iconoir-check-circled', description: 'Task completed: Design new UI', time: '5h ago' },
-    { id: 3, icon: 'iconoir-building', description: 'Department created: Marketing', time: '1d ago' },
-    { id: 4, icon: 'iconoir-trending-up', description: 'Q2 Financial Report generated', time: '2d ago' },
-  ]);
+  private employeesService = inject(EmployeesService);
+  private departmentsService = inject(DepartmentsService);
+
+  private employees = this.employeesService.getEmployees();
+  private departments = this.departmentsService.getDepartments();
+
+  totalEmployees = computed(() => this.employees().length);
+  activeDepartments = computed(() => this.departments().length);
+
+  recentActivity = computed(() => {
+    const latestEmployees = this.employees()
+      .slice(-4) // Get the last 4 employees
+      .map(employee => ({
+        id: employee.id,
+        icon: 'iconoir-user-plus',
+        description: `New employee added: ${employee.name}`,
+        time: 'Just now' // Placeholder time
+      }));
+    return latestEmployees;
+  });
 }

@@ -1,250 +1,206 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { EmployeesService, Employee } from './employees.service';
-import { CurrencyPipe } from '@angular/common';
+import { EmployeesService } from './employees.service';
 import { EmployeeFormComponent } from './employee-form.component';
 
 @Component({
   selector: 'app-employees',
-  imports: [CurrencyPipe, EmployeeFormComponent],
+  imports: [EmployeeFormComponent],
   template: `
-    <div class="employees-header">
-      <h1>Employees</h1>
-      <div class="actions">
-        <input type="text" placeholder="Search employees..." [value]="searchTerm()" (input)="searchTerm.set($event.target.value)" class="search-input">
-        <button class="add-employee-button" (click)="onAdd()"><i class="icon iconoir-plus"></i> Add Employee</button>
-      </div>
-    </div>
+    <div class="employees-page">
+      <header class="page-header">
+        <h1>Employees</h1>
+        <div class="actions">
+          <input type="search" placeholder="Search employees..." [value]="searchTerm()" (input)="searchTerm.set($event.target.value)" class="search-input">
+          <button (click)="openForm()" class="add-button">
+            <i class="iconoir-plus"></i>
+            <span>Add Employee</span>
+          </button>
+        </div>
+      </header>
 
-    <div class="employees-table-container">
-      <table class="employees-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Position</th>
-            <th>Salary</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (emp of filteredEmployees(); track emp.id) {
+      <div class="table-container">
+        <table>
+          <thead>
             <tr>
-              <td>{{ emp.name }}</td>
-              <td>{{ emp.email }}</td>
-              <td>{{ emp.department }}</td>
-              <td>{{ emp.position }}</td>
-              <td>{{ emp.salary | currency }}</td>
-              <td>
-                <div class="employee-actions">
-                  <button (click)="onEdit(emp)"><i class="icon iconoir-edit-pencil"></i></button>
-                  <button (click)="onDelete(emp.id)"><i class="icon iconoir-trash"></i></button>
-                </div>
-              </td>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Position</th>
+              <th>Hire Date</th>
+              <th>Actions</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (employee of filteredEmployees(); track employee.id) {
+              <tr>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.hireDate }}</td>
+                <td>
+                  <button (click)="editEmployee(employee)" class="action-button edit-button">
+                    <i class="iconoir-edit-pencil"></i>
+                  </button>
+                  <button (click)="deleteEmployee(employee.id)" class="action-button delete-button">
+                    <i class="iconoir-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+            @if (filteredEmployees().length === 0) {
+              <tr>
+                <td colspan="6" class="no-results">No employees found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (isFormOpen()) {
+        <div class="modal-backdrop">
+          <app-employee-form 
+            [employee]="selectedEmployee()" 
+            (close)="closeForm()" 
+            (save)="saveEmployee($event)"
+          ></app-employee-form>
+        </div>
+      }
     </div>
-    
-    @if (isFormVisible()) {
-      <app-employee-form 
-        [employee]="selectedEmployee()" 
-        (close)="onCloseForm()" 
-        (saveEmployee)="onSave($event)" />
-    }
   `,
   styles: [`
-    :host {
-      --primary-glow: #00f2ff;
-      --secondary-glow: #a800ff;
-      --table-background: rgba(16, 16, 32, 0.8);
-      --border-color: rgba(0, 242, 255, 0.2);
-      --text-color: #e0e0e0;
+    .employees-page {
+      padding: 2rem;
     }
-
-    .employees-header {
+    .page-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-color);
-      flex-wrap: wrap;
-      gap: 1rem;
     }
-
-    .employees-header h1 {
+    h1 {
       font-size: 2.5rem;
       font-weight: bold;
-      background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
-
     .actions {
       display: flex;
-      align-items: center;
       gap: 1rem;
-      flex-wrap: wrap;
     }
-
     .search-input {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 0.8rem 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #333;
       border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      width: 100%;
-      max-width: 300px;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--primary-glow);
-      box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-    }
-
-    .add-employee-button {
-      background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+      background: #1c1c1c;
       color: #fff;
-      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+    }
+    .add-button {
+      background: #007bff;
+      color: #fff;
       border: none;
+      padding: 0.75rem 1.5rem;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      width: 100%;
-      justify-content: center;
+      font-size: 1rem;
     }
-
-    .add-employee-button:hover {
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
-      transform: translateY(-2px);
+    .add-button .iconoir-plus {
+      font-size: 1.2rem;
     }
-    
-    .add-employee-button .icon {
-      font-size: 1.3rem;
-    }
-
-    .employees-table-container {
+    .table-container {
       overflow-x: auto;
     }
-
-    .employees-table {
+    table {
       width: 100%;
       border-collapse: collapse;
-      background: var(--table-background);
-      border-radius: 12px;
-      overflow: hidden;
     }
-
-    .employees-table th, .employees-table td {
-      padding: 1.2rem 1.5rem;
+    th, td {
+      padding: 1rem;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #333;
     }
-
-    .employees-table th {
-      background: rgba(0,0,0,0.3);
-      font-weight: 600;
-      color: #fff;
+    th {
+      background: #1c1c1c;
+      font-weight: bold;
     }
-
-    .employees-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .employees-table tbody tr:hover {
-      background: rgba(0, 242, 255, 0.05);
-    }
-    
-    .employee-actions button {
+    .action-button {
       background: none;
       border: none;
       color: #aaa;
       cursor: pointer;
-      transition: color 0.3s ease;
-      margin-left: 0.5rem;
-      padding: 0.25rem;
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
     }
-    
-    .employee-actions button .icon {
-      font-size: 1.4rem;
-      line-height: 1;
+    .edit-button {
+      color: #007bff;
     }
-    
-    .employee-actions button:hover {
-      color: var(--primary-glow);
+    .delete-button {
+      color: #d9534f;
     }
-    
-    @media (min-width: 768px) {
-      .actions {
-        flex-wrap: nowrap;
-      }
-      
-      .search-input {
-        width: auto;
-      }
-      
-      .add-employee-button {
-        width: auto;
-      }
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      font-style: italic;
+      color: #777;
+    }
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   `]
 })
 export class EmployeesComponent {
   private employeesService = inject(EmployeesService);
-  employees = signal<Employee[]>([]);
-
+  
+  employees = this.employeesService.getEmployees();
   searchTerm = signal('');
-  isFormVisible = signal(false);
-  selectedEmployee = signal<Employee | null>(null);
+  isFormOpen = signal(false);
+  selectedEmployee = signal<any>(null);
 
   filteredEmployees = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    return this.employees().filter(emp => 
-      emp.name.toLowerCase().includes(term) ||
-      emp.email.toLowerCase().includes(term) ||
-      emp.department.toLowerCase().includes(term) ||
-      emp.position.toLowerCase().includes(term)
+    return this.employees().filter(employee => 
+      employee.name.toLowerCase().includes(term) ||
+      employee.email.toLowerCase().includes(term) ||
+      employee.department.toLowerCase().includes(term)
     );
   });
 
-  constructor() {
-    this.loadEmployees();
-  }
-
-  loadEmployees() {
-    this.employeesService.getEmployees().subscribe(employees => this.employees.set(employees));
-  }
-
-  onAdd() {
+  openForm() {
+    this.isFormOpen.set(true);
     this.selectedEmployee.set(null);
-    this.isFormVisible.set(true);
   }
 
-  onEdit(employee: Employee) {
+  closeForm() {
+    this.isFormOpen.set(false);
+  }
+
+  editEmployee(employee: any) {
     this.selectedEmployee.set(employee);
-    this.isFormVisible.set(true);
+    this.isFormOpen.set(true);
   }
 
-  onDelete(id: number) {
-    this.employeesService.deleteEmployee(id).subscribe(() => this.loadEmployees());
+  saveEmployee(employee: any) {
+    if (employee.id) {
+      this.employeesService.updateEmployee(employee);
+    } else {
+      this.employeesService.addEmployee(employee);
+    }
+    this.closeForm();
   }
 
-  onCloseForm() {
-    this.isFormVisible.set(false);
-  }
-
-  onSave(employee: Employee) {
-    this.employeesService.saveEmployee(employee).subscribe(() => this.loadEmployees());
-    this.isFormVisible.set(false);
+  deleteEmployee(id: number) {
+    if (confirm('Are you sure you want to delete this employee?')) {
+      this.employeesService.deleteEmployee(id);
+    }
   }
 }
