@@ -40,15 +40,22 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    @PostMapping("/login")
+   @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         Optional<User> userOptional = userRepository.findByEmail(authRequest.getEmail());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
-                // In a real application, you would generate a JWT token here
-                return ResponseEntity.ok(new AuthResponse("dummy-jwt-token"));
+                // Create a user object for the response (excluding password)
+                User responseUser = new User();
+                responseUser.setId(user.getId());
+                responseUser.setName(user.getName());
+                responseUser.setEmail(user.getEmail());
+                // Don't include password in response
+                
+                AuthResponse response = new AuthResponse("dummy-jwt-token", responseUser);
+                return ResponseEntity.ok(response);
             }
         }
 
