@@ -21,13 +21,10 @@ WorkZen is a modern, single-page employee management application built with Angu
 *   **Interactive Elements:** Buttons and other interactive elements feature subtle hover effects and transitions to provide visual feedback to the user.
 *   **Iconography:** The application uses the `iconoir` icon library for a clean and consistent set of icons.
 
-## Current Task: Remove Glassmorphism Effect
+## Current Task: Fix Dashboard UI
 
 ### Plan:
 
-*   [x] Remove `backdrop-filter` and `-webkit-backdrop-filter` from `layout.component.css`.
-*   [x] Remove `backdrop-filter` and `-webkit-backdrop-filter` from `dashboard.component.css`.
-*   [x] Remove `backdrop-filter` and `-webkit-backdrop-filter` from `employees.component.css`.
-*   [x] Remove `backdrop-filter` from `departments.component.css`.
-*   [x] Fix unrelated build errors in `dashboard.component.ts`.
+*   [x] Correct the component's theme to ensure it's not white during dark mode.
+*   [x] Update the icons for "Present," "Absent," "Create New Department," and "Generate Report" to display correctly.
 *   [x] Run `ng build` to confirm that everything is working as expected.
