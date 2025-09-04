@@ -6,28 +6,31 @@
     "myapp": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
+      "root": "frontend",
+      "sourceRoot": "frontend/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
+            "outputPath": "dist/myapp",
+            "index": "frontend/src/index.html",
+            "browser": "frontend/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "frontend/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "frontend/public"
               }
             ],
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css"
-            ]
+              "frontend/src/custom-theme.scss",
+              "frontend/src/styles.css"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -61,7 +64,7 @@
             },
             "development": {
               "buildTarget": "myapp:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "frontend/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -76,16 +79,17 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "frontend/tsconfig.spec.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "frontend/public"
               }
             ],
             "styles": [
-              "src/styles.css"
-            ]
+              "frontend/src/styles.css"
+            ],
+            "scripts": []
           }
         }
       }
