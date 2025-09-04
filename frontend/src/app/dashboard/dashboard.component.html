@@ -21,24 +21,24 @@
           <span class="stat-label">Active Departments</span>
         </div>
       </div>
-  
+
       <div class="stat-card">
         <div class="stat-icon">
-          <i class="iconoir-calendar"></i>
+          <i class="iconoir-user-check"></i>
         </div>
         <div class="stat-info">
-          <span class="stat-value">12</span>
-          <span class="stat-label">Upcoming Leaves</span>
+          <span class="stat-value">{{ presentEmployees() }}</span>
+          <span class="stat-label">Present</span>
         </div>
       </div>
-  
+
       <div class="stat-card">
         <div class="stat-icon">
-          <i class="iconoir-clock"></i>
+          <i class="iconoir-user-remove"></i>
         </div>
         <div class="stat-info">
-          <span class="stat-value">92%</span>
-          <span class="stat-label">Overall Attendance</span>
+          <span class="stat-value">{{ absentEmployees() }}</span>
+          <span class="stat-label">Absent</span>
         </div>
       </div>
     </div>

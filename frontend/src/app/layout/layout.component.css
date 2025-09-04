@@ -11,8 +11,6 @@
 app-sidebar {
   width: var(--sidebar-width);
   background-color: var(--card-bg-color);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--card-border-color);
   transition: transform 0.3s ease-in-out;
   z-index: 100;
@@ -61,8 +59,6 @@ app-sidebar {
     left: 0;
     right: 0;
     background: var(--card-bg-color);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     z-index: 101;
     border-bottom: 1px solid var(--card-border-color);
   }
