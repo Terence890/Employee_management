@@ -21,10 +21,10 @@ WorkZen is a modern, single-page employee management application built with Angu
 *   **Interactive Elements:** Buttons and other interactive elements feature subtle hover effects and transitions to provide visual feedback to the user.
 *   **Iconography:** The application uses the `iconoir` icon library for a clean and consistent set of icons.
 
-## Current Task: Fix Dashboard UI
+## Current Task: Fix Theme Switching
 
 ### Plan:
 
-*   [x] Correct the component's theme to ensure it's not white during dark mode.
-*   [x] Update the icons for "Present," "Absent," "Create New Department," and "Generate Report" to display correctly.
+*   [x] Revert the unnecessary changes made to `dashboard.component.ts` and `dashboard.component.html`.
+*   [x] Verify that `dashboard.component.css` correctly uses the global theme classes.
 *   [x] Run `ng build` to confirm that everything is working as expected.

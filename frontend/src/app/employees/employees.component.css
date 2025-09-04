@@ -16,7 +16,7 @@
 .text-gradient {
   font-size: 2.5rem;
   font-weight: bold;
-  background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -30,16 +30,23 @@
 
 .view-toggle {
   display: flex;
-  background: var(--card-bg-color);
   border-radius: 8px;
   padding: 0.25rem;
-  border: 1px solid var(--card-border-color);
+}
+
+.light-theme .view-toggle {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .view-toggle {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 .view-toggle button {
   background: transparent;
   border: none;
-  color: var(--text-color-secondary);
   padding: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
@@ -47,14 +54,22 @@
   line-height: 1;
 }
 
+.light-theme .view-toggle button {
+  color: var(--text-light);
+}
+
+.dark-theme .view-toggle button {
+  color: var(--text-dark);
+}
+
 .view-toggle button.active {
-  background: var(--primary-glow);
+  background: var(--primary-color);
   color: #fff;
-  box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
 }
 
 .view-toggle button:not(.active):hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(109, 40, 217, 0.2);
 }
 
 .view-toggle i {
@@ -63,22 +78,31 @@
 
 .search-input {
   padding: 0.75rem 1rem;
-  border: 1px solid var(--card-border-color);
   border-radius: 8px;
-  background: var(--card-bg-color);
-  color: var(--text-color);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
+.light-theme .search-input {
+  border: 1px solid var(--card-border-light);
+  background: var(--card-bg-light);
+  color: var(--text-light);
+}
+
+.dark-theme .search-input {
+  border: 1px solid var(--card-border-dark);
+  background: var(--card-bg-dark);
+  color: var(--text-dark);
+}
+
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-glow);
-  box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
 }
 
 .add-button {
-  background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   color: #fff;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -93,7 +117,7 @@
 }
 
 .add-button:hover {
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.5);
   transform: translateY(-2px);
 }
 
@@ -104,9 +128,7 @@
 }
 
 .employee-card {
-  background: var(--card-bg-dark);
   border-radius: 16px;
-  border: 1px solid var(--card-border-color);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -114,32 +136,47 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
 }
 
+.light-theme .employee-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .employee-card {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
+}
+
 .employee-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 242, 255, 0.2), 0 0 15px rgba(0, 242, 255, 0.1);
-  border-color: rgba(0, 242, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(109, 40, 217, 0.2), 0 0 15px rgba(109, 40, 217, 0.1);
+  border-color: rgba(109, 40, 217, 0.3);
 }
 
 .card-header {
-  border-bottom: 1px solid var(--card-border-color);
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
 
+.light-theme .card-header {
+  border-bottom: 1px solid var(--card-border-light);
+}
+
+.dark-theme .card-header {
+  border-bottom: 1px solid var(--card-border-dark);
+}
+
 .card-header h3 {
   font-size: 1.4rem;
-  color: var(--text-color);
 }
 
 .card-header p {
   font-size: 1rem;
-  color: var(--primary-glow);
+  color: var(--primary-color);
 }
 
 .card-body p {
   display: flex;
   gap: 0.75rem;
-  color: var(--text-color-secondary);
   margin: 0.5rem 0;
 }
 
@@ -153,10 +190,18 @@
 
 .table-container {
   overflow-x: auto;
-  background: var(--card-bg-color);
   border-radius: 12px;
-  border: 1px solid var(--card-border-color);
   padding: 1rem;
+}
+
+.light-theme .table-container {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .table-container {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 table {
@@ -167,13 +212,26 @@ table {
 th, td {
   padding: 1.25rem 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--card-border-color);
+}
+
+.light-theme th, .light-theme td {
+  border-bottom: 1px solid var(--card-border-light);
+}
+
+.dark-theme th, .dark-theme td {
+  border-bottom: 1px solid var(--card-border-dark);
 }
 
 th {
-  background: rgba(0,0,0,0.2);
-  color: var(--text-color);
   font-size: 0.9rem;
+}
+
+.light-theme th {
+  background: #f1f5f9;
+}
+
+.dark-theme th {
+  background: rgba(0,0,0,0.2);
 }
 
 tr:last-child td {
@@ -188,14 +246,14 @@ tr:last-child td {
 .action-button {
   background: none;
   border: none;
-  color: var(--text-color-secondary);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
+
 .action-button:hover {
-  color: var(--primary-glow);
+  color: var(--primary-color);
 }
 
 .delete-button:hover {
@@ -206,14 +264,21 @@ tr:last-child td {
   text-align: center;
   padding: 4rem;
   font-size: 1.2rem;
-  color: var(--text-color-secondary);
 }
 
 .no-results {
   grid-column: 1 / -1;
-  background: var(--card-bg-color);
   border-radius: 12px;
-  border: 1px solid var(--card-border-color);
+}
+
+.light-theme .no-results {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .no-results {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 .modal-backdrop {
