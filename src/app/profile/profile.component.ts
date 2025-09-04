@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProfileComponent {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  private themeService = inject(ThemeService);
 
+  isDarkTheme = this.themeService.isDarkTheme;
   user = this.authService.user;
   profileForm: FormGroup;
   successMessage = signal<string | null>(null);
