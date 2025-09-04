@@ -10,6 +10,7 @@ import { SigninComponent } from './auth/signin.component';
 import { SignupComponent } from './auth/signup.component';
 import { authGuard } from './auth/auth.guard';
 import { publicGuard } from './auth/public.guard';
+import { AttendanceComponent } from './attendance/attendance';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, title: 'WorkZen - Dashboard' },
       { path: 'departments', component: DepartmentsComponent, title: 'WorkZen - Departments' },
       { path: 'employees', component: EmployeesComponent, title: 'WorkZen - Employees' },
+      { path: 'attendance', component: AttendanceComponent, title: 'WorkZen - Attendance' },
       { path: 'profile', component: ProfileComponent, title: 'WorkZen - Profile' },
       { path: 'settings', component: SettingsComponent, title: 'WorkZen - Settings' },
     ]

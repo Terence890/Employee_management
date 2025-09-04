@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Attendance</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of (attendance$ | async); track item.id) {
+        <tr>
+          <td>{{ item.employeeId }}</td>
+          <td>
+            <span [class]="item.present ? 'present' : 'absent'">
+              {{ item.present ? 'Present' : 'Absent' }}
+            </span>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

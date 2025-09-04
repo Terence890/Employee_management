@@ -15,6 +15,7 @@ import { AuthService } from '../auth/auth.service';
         <li><a routerLink="/dashboard" routerLinkActive="active"><i class="iconoir-dashboard-dots"></i><span>Dashboard</span></a></li>
         <li><a routerLink="/departments" routerLinkActive="active"><i class="iconoir-building"></i><span>Departments</span></a></li>
         <li><a routerLink="/employees" routerLinkActive="active"><i class="iconoir-community"></i><span>Employees</span></a></li>
+        <li><a routerLink="/attendance" routerLinkActive="active"><i class="iconoir-calendar"></i><span>Attendance</span></a></li>
         <li><a routerLink="/profile" routerLinkActive="active"><i class="iconoir-user"></i><span>Profile</span></a></li>
         <li><a routerLink="/settings" routerLinkActive="active"><i class="iconoir-settings"></i><span>Settings</span></a></li>
       </ul>
