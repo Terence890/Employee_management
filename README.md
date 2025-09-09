@@ -32,7 +32,7 @@ A full-stack employee management application built with Angular frontend and Spr
 - **Spring Boot 3.5.5** - Java application framework
 - **Spring Security** - Authentication and authorization
 - **Spring Data JPA** - Data persistence
-- **PostgreSQL** - Primary database
+- **MySQL** - Primary database
 - **H2 Database** - Development/testing database
 - **Swagger/OpenAPI** - API documentation
 - **Lombok** - Java code generator
@@ -44,12 +44,12 @@ A full-stack employee management application built with Angular frontend and Spr
 - **npm** or **yarn**
 - **Java 17** or higher
 - **Maven 3.6+**
-- **PostgreSQL 12+**
+- **MySQL 8+**
 
 ## [SETUP] Installation & Setup
 
 ### Database Setup
-1. Install PostgreSQL
+1. Install MySQL
 2. Create database:
    ```sql
    CREATE DATABASE workzen;
@@ -106,7 +106,7 @@ Employee_management/
 │   ├── angular.json
 │   └── package.json
 ├── Screenshot/              # Application screenshots
-└── postgres-data/           # PostgreSQL data directory
+└── mysql-data/           # MySQL data directory
 ```
 
 ## [AUTH] Authentication
