@@ -22,7 +22,7 @@ export class AttendanceComponent {
     date: ['', Validators.required],
     timeIn: ['', Validators.required],
     timeOut: ['', Validators.required],
-    isPresent: [true, Validators.required]
+    present: [true, Validators.required]
   });
 
   addAttendance() {

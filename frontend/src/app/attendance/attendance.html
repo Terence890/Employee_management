@@ -21,8 +21,8 @@
         <input id="timeOut" type="time" formControlName="timeOut" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       </div>
       <div class="flex items-center">
-        <input id="isPresent" type="checkbox" formControlName="isPresent" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-        <label for="isPresent" class="ml-2 block text-sm text-gray-900">Present</label>
+        <input id="present" type="checkbox" formControlName="present" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+        <label for="present" class="ml-2 block text-sm text-gray-900">Present</label>
       </div>
       <div>
         <button type="submit" [disabled]="!attendanceForm.valid" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">Add Attendance</button>
@@ -49,8 +49,8 @@
             <td class="p-3">{{ item.timeIn }}</td>
             <td class="p-3">{{ item.timeOut }}</td>
             <td class="p-3">
-              <span [class]="item.isPresent ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
-                {{ item.isPresent ? 'Present' : 'Absent' }}
+              <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
+                {{ item.present ? 'Present' : 'Absent' }}
               </span>
             </td>
           </tr>
