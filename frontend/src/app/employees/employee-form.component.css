@@ -1,96 +1,141 @@
-.employee-form {
-  background: var(--background-color-light);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-container {
+  width: 90%;
   max-width: 500px;
-  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
 }
 
-.dark-theme .employee-form {
-    background-color: var(--background-color-dark);
+.light-theme .form-container {
+  background: var(--app-bg-light);
+  border: 1px solid var(--card-border-light);
 }
 
-.employee-form h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  color: var(--text-color-light);
+.dark-theme .form-container {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
-.dark-theme .employee-form h2 {
-    color: var(--text-color-dark);
+.form-container h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
   display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #888;
 }
 
-.dark-theme .form-group label {
-    color: var(--text-color-dark);
-}
-
-.form-group input {
+.form-group input,
+.form-group select {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.dark-theme .form-group input {
-    background-color: var(--card-bg-dark);
-    border-color: var(--card-border-dark);
-    color: var(--text-color-dark);
+.light-theme .form-group input,
+.light-theme .form-group select {
+  border: 1px solid var(--card-border-light);
+  background: #f1f5f9;
+  color: var(--text-light);
 }
 
-.image-preview {
-  text-align: center;
-  margin-bottom: 1.5rem;
+.dark-theme .form-group input,
+.dark-theme .form-group select {
+  border: 1px solid #334155;
+  background: #283447;
+  color: var(--text-dark);
 }
 
-.image-preview img {
-  max-width: 150px;
-  max-height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--primary-color);
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
+  background: transparent;
+}
+
+.full-width {
+  grid-column: 1 / -1;
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  margin-top: 1.5rem;
+  grid-column: 1 / -1;
 }
 
-.cancel-button,
-.save-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
+.form-actions button {
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cancel-button {
-  background-color: #f0f0f0;
-  color: #555;
+.form-actions button[type="button"] {
+  background: transparent;
 }
 
-.save-button {
-  background-color: var(--primary-color);
+.light-theme .form-actions button[type="button"] {
+  color: var(--text-light-secondary);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .form-actions button[type="button"] {
+  color: var(--text-dark-secondary);
+  border: 1px solid var(--card-border-dark);
+}
+
+.form-actions button[type="button"]:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.form-actions button[type="submit"] {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   color: #fff;
 }
 
-.save-button:disabled {
-  background-color: #ccc;
+.form-actions button[type="submit"]:hover {
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.5);
+  transform: translateY(-2px);
+}
+
+.form-actions button[type="submit"]:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }

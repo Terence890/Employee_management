@@ -262,7 +262,7 @@ tr:last-child td {
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 12, 23, 0.7);
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -280,16 +280,17 @@ tr:last-child td {
   max-width: 500px;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
   animation: slideIn 0.3s ease;
 }
 
 .light-theme .modal-content {
   background: var(--app-bg-light);
+  border: 1px solid var(--card-border-light);
 }
 
 .dark-theme .modal-content {
-  background: #1e293b;
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
 }
 
 @keyframes slideIn {
