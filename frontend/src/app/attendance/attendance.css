@@ -270,11 +270,18 @@ tr:last-child td {
   animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .modal-content {
   width: 90%;
   max-width: 500px;
   padding: 2rem;
   border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+  animation: slideIn 0.3s ease;
 }
 
 .light-theme .modal-content {
@@ -282,14 +289,201 @@ tr:last-child td {
 }
 
 .dark-theme .modal-content {
-  background: var(--app-bg-dark);
+  background: #1e293b;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.light-theme .close-button {
+  color: var(--text-light-secondary);
+}
+
+.dark-theme .close-button {
+  color: var(--text-dark-secondary);
+}
+
+.close-button:hover {
+  background-color: rgba(109, 40, 217, 0.1);
+  color: var(--primary-color);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.light-theme .form-group input {
+  border: 1px solid var(--card-border-light);
+  background: #f1f5f9;
+  color: var(--text-light);
+}
+
+.dark-theme .form-group input {
+  border: 1px solid #334155;
+  background: #283447;
+  color: var(--text-dark);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
+  background: transparent;
+}
+
+.time-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.present-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-switch label:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + label {
+    background-color: var(--primary-color);
+}
+
+input:checked + label:before {
+    transform: translateX(22px);
+}
+
+.present-toggle span {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancel-button, .submit-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: transparent;
+}
+
+.light-theme .cancel-button {
+  color: var(--text-light-secondary);
+  border: 1px solid var(--card-border-light);
+}
+
+.dark-theme .cancel-button {
+  color: var(--text-dark-secondary);
+  border: 1px solid var(--card-border-dark);
+}
+
+.cancel-button:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.submit-button {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: #fff;
+}
+
+.submit-button:hover {
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.5);
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
 .status-badge {
   display: inline-flex;
   align-items: center;
