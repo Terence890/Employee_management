@@ -1,61 +1,113 @@
-<div class="p-6">
-  <h2 class="text-3xl font-bold mb-6">Attendance</h2>
+<div class="employees-page">
+  <header class="page-header">
+    <h1 class="text-gradient">Attendance</h1>
+    <div class="actions">
+      <div class="view-toggle">
+        <button (click)="setViewMode('card')" [class.active]="viewMode() === 'card'">
+          <i class="iconoir-view-grid"></i>
+        </button>
+        <button (click)="setViewMode('list')" [class.active]="viewMode() === 'list'">
+          <i class="iconoir-list"></i>
+        </button>
+      </div>
+      <input type="search" placeholder="Search by employee id..." [value]="searchTerm()" (input)="searchTerm.set($event.target.value)" class="search-input">
+      <button (click)="openForm()" class="add-button">
+        <i class="iconoir-plus"></i>
+        <span>Add Attendance</span>
+      </button>
+    </div>
+  </header>
 
-  <div class="bg-white/50 p-6 rounded-lg shadow-md mb-6">
-    <h3 class="text-xl font-bold mb-4">Add Attendance</h3>
-    <form [formGroup]="attendanceForm" (ngSubmit)="addAttendance()" class="space-y-4">
-      <div>
-        <label for="employeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
-        <input id="employeeId" type="text" formControlName="employeeId" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-      <div>
-        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-        <input id="date" type="date" formControlName="date" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-      <div>
-        <label for="timeIn" class="block text-sm font-medium text-gray-700">Time In</label>
-        <input id="timeIn" type="time" formControlName="timeIn" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-      <div>
-        <label for="timeOut" class="block text-sm font-medium text-gray-700">Time Out</label>
-        <input id="timeOut" type="time" formControlName="timeOut" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-      <div class="flex items-center">
-        <input id="present" type="checkbox" formControlName="present" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-        <label for="present" class="ml-2 block text-sm text-gray-900">Present</label>
-      </div>
-      <div>
-        <button type="submit" [disabled]="!attendanceForm.valid" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">Add Attendance</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="bg-white/50 p-6 rounded-lg shadow-md">
-    <table class="w-full text-left">
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="p-3">Employee ID</th>
-          <th class="p-3">Date</th>
-          <th class="p-3">Time In</th>
-          <th class="p-3">Time Out</th>
-          <th class="p-3">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of (attendance$ | async); track item.id) {
-          <tr class="border-b">
-            <td class="p-3">{{ item.employeeId }}</td>
-            <td class="p-3">{{ item.date }}</td>
-            <td class="p-3">{{ item.timeIn }}</td>
-            <td class="p-3">{{ item.timeOut }}</td>
-            <td class="p-3">
-              <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
+  @if (viewMode() === 'card') {
+    <div class="employee-grid">
+      @for (item of filteredAttendance(); track item.id) {
+        <div class="employee-card">
+          <div class="card-header">
+            <h3>{{ item.employeeId }}</h3>
+            <p>{{ item.date }}</p>
+          </div>
+          <div class="card-body">
+            <p><i class="iconoir-clock-in"></i> Time In: {{ item.timeIn }}</p>
+            <p><i class="iconoir-clock-out"></i> Time Out: {{ item.timeOut }}</p>
+          </div>
+          <div class="card-footer">
+             <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
                 {{ item.present ? 'Present' : 'Absent' }}
               </span>
-            </td>
+          </div>
+        </div>
+      }
+      @if (filteredAttendance().length === 0) {
+        <p class="no-results">No attendance records found.</p>
+      }
+    </div>
+  } @else {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Date</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Status</th>
           </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          @for (item of filteredAttendance(); track item.id) {
+            <tr>
+              <td>{{ item.employeeId }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.timeIn }}</td>
+              <td>{{ item.timeOut }}</td>
+              <td>
+                <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
+                  {{ item.present ? 'Present' : 'Absent' }}
+                </span>
+              </td>
+            </tr>
+          }
+          @if (filteredAttendance().length === 0) {
+            <tr>
+              <td colspan="5" class="no-results-table">No attendance records found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (isFormOpen()) {
+    <div class="modal-backdrop">
+       <div class="modal-content">
+        <h3 class="text-xl font-bold mb-4">Add Attendance</h3>
+        <form [formGroup]="attendanceForm" (ngSubmit)="addAttendance()" class="space-y-4">
+          <div>
+            <label for="employeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
+            <input id="employeeId" type="text" formControlName="employeeId" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <div>
+            <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+            <input id="date" type="date" formControlName="date" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <div>
+            <label for="timeIn" class="block text-sm font-medium text-gray-700">Time In</label>
+            <input id="timeIn" type="time" formControlName="timeIn" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <div>
+            <label for="timeOut" class="block text-sm font-medium text-gray-700">Time Out</label>
+            <input id="timeOut" type="time" formControlName="timeOut" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <div class="flex items-center">
+            <input id="present" type="checkbox" formControlName="present" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+            <label for="present" class="ml-2 block text-sm text-gray-900">Present</label>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" (click)="closeForm()" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+            <button type="submit" [disabled]="!attendanceForm.valid" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 </div>
