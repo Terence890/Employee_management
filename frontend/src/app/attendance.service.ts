@@ -12,4 +12,8 @@ export class AttendanceService {
   getAttendance(): Observable<Attendance[]> {
     return this.http.get<Attendance[]>('/api/attendance');
   }
+
+  addAttendance(attendance: Attendance): Observable<Attendance> {
+    return this.http.post<Attendance>('/api/attendance', attendance);
+  }
 }
