@@ -39,7 +39,7 @@ export class AttendanceComponent {
     const term = this.searchTerm().toLowerCase();
     const attendance = this.attendance();
     return attendance.filter(item => 
-      item.employeeId.toLowerCase().includes(term)
+      item.employeeId.toString().toLowerCase().includes(term)
     );
   });
 
