@@ -31,8 +31,9 @@
             <p><i class="iconoir-clock-out"></i> Time Out: {{ item.timeOut }}</p>
           </div>
           <div class="card-footer">
-             <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
-                {{ item.present ? 'Present' : 'Absent' }}
+             <span class="status-badge" [class.status-present]="item.present" [class.status-absent]="!item.present">
+                <i [class]="item.present ? 'iconoir-user-check' : 'iconoir-user-remove'"></i>
+                <span>{{ item.present ? 'Present' : 'Absent' }}</span>
               </span>
           </div>
         </div>
@@ -61,8 +62,9 @@
               <td>{{ item.timeIn }}</td>
               <td>{{ item.timeOut }}</td>
               <td>
-                <span [class]="item.present ? 'bg-green-500 text-white px-2 py-1 rounded' : 'bg-red-500 text-white px-2 py-1 rounded'">
-                  {{ item.present ? 'Present' : 'Absent' }}
+                 <span class="status-badge" [class.status-present]="item.present" [class.status-absent]="!item.present">
+                  <i [class]="item.present ? 'iconoir-user-check' : 'iconoir-user-remove'"></i>
+                  <span>{{ item.present ? 'Present' : 'Absent' }}</span>
                 </span>
               </td>
             </tr>

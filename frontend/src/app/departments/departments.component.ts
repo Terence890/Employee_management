@@ -6,6 +6,7 @@ import { DepartmentFormComponent } from './department-form.component';
   selector: 'app-departments',
   imports: [DepartmentFormComponent],
   template: `
+   <div class="departments-page">
     <div class="departments-header">
       <h1 class="text-gradient">Departments</h1>
       <div class="actions">
@@ -47,6 +48,7 @@ import { DepartmentFormComponent } from './department-form.component';
         (close)="closeForm()" 
         (save)="saveDepartment($event)" />
     }
+   </div>
   `,
   styleUrls: ['./departments.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
