@@ -1,15 +1,15 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { SignInComponent } from './signin/signin';
-import { SignUpComponent } from './signup/signup';
+import { Signin } from './signin/signin';
+import { Signup } from './signup/signup';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
       { path: '', component: LandingPageComponent },
-      { path: 'signin', component: SignInComponent },
-      { path: 'signup', component: SignUpComponent },
+      { path: 'signin', component: Signin },
+      { path: 'signup', component: Signup },
     ]),
   ],
 };
