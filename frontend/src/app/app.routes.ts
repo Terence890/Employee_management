@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -5,16 +6,32 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
-import { AuthLayoutComponent } from './auth/auth-layout.component';
 import { SigninComponent } from './auth/signin.component';
 import { SignupComponent } from './auth/signup.component';
 import { authGuard } from './auth/auth.guard';
 import { publicGuard } from './auth/public.guard';
 import { AttendanceComponent } from './attendance/attendance';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
   {
     path: '',
+    component: LandingPageComponent,
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [publicGuard],
+    title: 'WorkZen - Sign In',
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [publicGuard],
+    title: 'WorkZen - Sign Up',
+  },
+  {
+    path: 'app',
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
@@ -27,14 +44,5 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent, title: 'WorkZen - Settings' },
     ]
   },
-  {
-    path: '',
-    component: AuthLayoutComponent,
-    canActivate: [publicGuard],
-    children: [
-      { path: 'signin', component: SigninComponent, title: 'WorkZen - Sign In' },
-      { path: 'signup', component: SignupComponent, title: 'WorkZen - Sign Up' }
-    ]
-  },
-  { path: '**', redirectTo: 'signin' }
+  { path: '**', redirectTo: '' }
 ];
