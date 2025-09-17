@@ -19,12 +19,12 @@
 }
 
 .light-theme .form-container {
-  background: #ffffff;
+  background: var(--card-bg-light);
   border: 1px solid var(--card-border-light);
 }
 
 .dark-theme .form-container {
-  background: #1e293b;
+  background: var(--card-bg-dark);
   border: 1px solid var(--card-border-dark);
 }
 
