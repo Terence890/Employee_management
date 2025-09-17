@@ -1,30 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employees/employee-list.component';
+import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeFormComponent } from './employees/employee-form.component';
-import { DepartmentListComponent } from './departments/department-list.component';
+import { DepartmentsComponent } from './departments/departments.component';
 import { DepartmentFormComponent } from './departments/department-form.component';
-import { AttendanceListComponent } from './attendance/attendance-list.component';
+import { AttendanceComponent } from './attendance/attendance';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListComponent,
     EmployeeFormComponent,
-    DepartmentListComponent,
     DepartmentFormComponent,
-    AttendanceListComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule,
+    EmployeesComponent,
+    DepartmentsComponent,
+    AttendanceComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
