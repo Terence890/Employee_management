@@ -13,12 +13,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EmployeeFormComponent,
-    DepartmentFormComponent,
-    LandingPageComponent,
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
     FormsModule,
@@ -28,6 +23,10 @@ import { CommonModule } from '@angular/common';
     EmployeesComponent,
     DepartmentsComponent,
     AttendanceComponent,
+    AppComponent,
+    EmployeeFormComponent,
+    DepartmentFormComponent,
+    LandingPageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
